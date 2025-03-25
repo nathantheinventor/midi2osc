@@ -1,13 +1,21 @@
 import click
 
-@click.command()
-def config():
-    click.echo("config")
-    ...
+from config import config
+from config_file import get_config
+from run import run
 
-@click.group()
-def cli():
-    click.echo("Hello, World!")
-    pass
+
+@click.group(invoke_without_command=True)
+@click.pass_context
+def cli(ctx):
+    """Main function of the CLI"""
+    if ctx.invoked_subcommand:
+        return
+    if get_config() is None:
+        config()
+    else:
+        run()
+
 
 cli.add_command(config)
+cli.add_command(run)
