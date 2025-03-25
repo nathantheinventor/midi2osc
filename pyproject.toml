@@ -18,3 +18,9 @@ package = true
 
 [project.scripts]
 midi2osc = "main:cli"
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+fix = true
+src = ["src"]
