@@ -1,0 +1,7 @@
+[project]
+name = "midi2osc"
+version = "0.1.0"
+description = "Forward MIDI messages to OSC"
+readme = "README.md"
+requires-python = "^3.12"
+dependencies = []
