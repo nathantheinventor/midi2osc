@@ -7,7 +7,7 @@ from run import run
 
 @click.group(invoke_without_command=True)
 @click.pass_context
-def cli(ctx):
+def cli(ctx: click.Context):
     """Main function of the CLI"""
     if ctx.invoked_subcommand:
         return

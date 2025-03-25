@@ -1,0 +1,15 @@
+{
+  "strict": [
+    "src/**/*.py"
+  ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "useLibraryCodeForTypes": true,
+  "pythonVersion": "3.12",
+  "pythonPlatform": "Linux",
+  "executionEnvironments": [
+    {
+      "root": "src"
+    }
+  ]
+}
