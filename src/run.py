@@ -24,4 +24,3 @@ def run():
                         osc_command = osc_command.replace(f":{param}", str(value))
                     click.echo(f"Sending message {osc_command}")
                     client.send_message(osc_command, 0)
-    ...

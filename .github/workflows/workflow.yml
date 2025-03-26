@@ -1,0 +1,36 @@
+name: workflow
+run-name: CI/CD
+on:
+  push:
+    branches: '*'
+jobs:
+  codequality:
+    runs-on: ubuntu-latest
+    container: python:3.12
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          set -ex
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+          python3 -m pip install uv
+          /github/home/.local/bin/uv sync
+          /github/home/.local/bin/uv run pre-commit run --all-files
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    container: python:3.12
+    environment: release
+    needs: codequality
+    if: ${{ github.ref == 'refs/heads/main' }}
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        run: |
+          set -ex
+          python3 -m pip install uv
+          /github/home/.local/bin/uv sync
+          /github/home/.local/bin/uv build
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
