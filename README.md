@@ -22,5 +22,5 @@ osc_address: "1.2.3.4" # IP address of the OSC server
 osc_port: 8005 # Port of the OSC server
 messages:
   - midi: "note_on" # The MIDI message to listen for
-    osc: "/cs/playback/gotocue/:note" # The OSC message to send; will replace `:note` with the note number sent in the MIDI message
+    osc: "/cs/playback/gotocue/:note" # The OSC message to send; will replace `:note`/`:channel`/etc. with the parameter sent in the MIDI message
 ```

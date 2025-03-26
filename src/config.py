@@ -25,7 +25,7 @@ def config(
         osc_port = click.prompt("OSC Port", type=int, default=8005)
 
     midi_command = midi_command or click.prompt("MIDI Message", default="note_on")
-    osc_command = osc_command or click.prompt("OSC Message (use :note to insert the MIDI value)")
+    osc_command = osc_command or click.prompt("OSC Message (use :note/:channel/etc. to insert the MIDI value)")
     assert midi_command and osc_command
     messages = [Message(midi=midi_command, osc=osc_command)]
     while click.confirm("Add another message?", default=False):
