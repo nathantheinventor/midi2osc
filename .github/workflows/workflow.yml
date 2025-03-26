@@ -3,6 +3,10 @@ run-name: CI/CD
 on:
   push:
     branches: '*'
+
+permissions:
+  contents: write
+
 jobs:
   codequality:
     runs-on: ubuntu-latest
@@ -18,7 +22,6 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    container: python:3.12
     environment: release
     needs: codequality
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -26,6 +29,10 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.12.6'
       - name: Deploy
         run: |
           set -ex
@@ -33,4 +40,4 @@ jobs:
           uv sync
           uv build
       - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@0a87186d5f9e2303ed3c19e0fdd59abe52a28bb7
+        uses: pypa/gh-action-pypi-publish@release/v1
