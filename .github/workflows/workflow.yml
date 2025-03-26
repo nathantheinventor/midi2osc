@@ -13,8 +13,8 @@ jobs:
           set -ex
           git config --global --add safe.directory $GITHUB_WORKSPACE
           python3 -m pip install uv
-          /github/home/.local/bin/uv sync
-          /github/home/.local/bin/uv run pre-commit run --all-files
+          uv sync
+          uv run pre-commit run --all-files
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -30,7 +30,7 @@ jobs:
         run: |
           set -ex
           python3 -m pip install uv
-          /github/home/.local/bin/uv sync
-          /github/home/.local/bin/uv build
+          uv sync
+          uv build
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
