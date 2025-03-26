@@ -33,4 +33,4 @@ jobs:
           uv sync
           uv build
       - name: Publish package distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@0a87186d5f9e2303ed3c19e0fdd59abe52a28bb7
